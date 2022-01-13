@@ -1,0 +1,41 @@
+{
+  "name": "@tropixinc/pixchain-react-metamask",
+  "version": "1.0.0",
+  "description": "Blockchain signing library",
+  "main": "./lib/cjs/index.js",
+  "module": "./lib/esm/index.js",
+  "types": "./lib/esm/index.d.ts",
+
+  "scripts": {
+    "build": "npm run build:esm && npm run build:cjs",
+    "build:esm": "tsc",
+    "build:cjs": "tsc --module commonjs --outDir lib/cjs",
+    "prepublishOnly": "npm run build"
+  },
+  "peerDependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.2",
+    "@types/react-dom": "^17.0.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "typescript": "^4.0.2"
+  },
+  "files": [
+    "/lib"
+  ],
+  "dependencies": {
+    "@usedapp/core": "0.9.0",
+    "dayjs": "1.10.7",
+    "immer": "9.0.12",
+    "p-memoize": "4.0.3",
+    "swr": "1.1.2"
+  },
+  "license": "MIT",
+  "author": "Mario Costa <mario@tropix.io>",
+  "repository": {
+    "url": "https://github.com/TropixInc/pixchain-react-metamask"
+  }
+}
