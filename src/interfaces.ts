@@ -1,7 +1,7 @@
 export enum BlockchainCallableEnum {
-  CALL = "call",
-  TRANSACTION = "transaction",
-  DEPLOYMENT = "deployment"
+  CALL = 'call',
+  TRANSACTION = 'transaction',
+  DEPLOYMENT = 'deployment',
 }
 
 export type State = {
@@ -10,7 +10,6 @@ export type State = {
   sent: Record<Transaction['id'], string>;
   notified: Record<Transaction['id'], Date>;
 };
-
 
 export interface TransactionInput {
   name: string;

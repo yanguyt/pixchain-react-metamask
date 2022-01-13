@@ -1,4 +1,4 @@
-import { State } from "../interfaces";
+import { State } from '../interfaces';
 
 export class StateStorage {
   private CACHE_KEY = 'SIGNING_REDUCER_STATE';
