@@ -8,7 +8,7 @@
   "scripts": {
     "check": "npm run check-types && npm run lint && npm run build",
     "check-types": "tsc --incremental false --noEmit",
-    "lint": "eslint \"{src}/**/*.ts?(x)\" --fix",
+    "lint": "eslint 'src/**/*.{ts,tsx}' --quiet --fix",
     "format": "prettier --write \"src/**/*.ts?(x)\"",
     "build": "npm run build:esm && npm run build:cjs",
     "build:esm": "tsc",
@@ -17,13 +17,15 @@
     "release": "standard-version",
     "git:add": "git add --all",
     "git:commit": "git-cz",
-    "git": "npm run git:add && npm run git:commit"
+    "git": "npm run git:add && npm run git:commit",
+    "prepare": "husky install"
   },
   "peerDependencies": {
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
   "devDependencies": {
+    "@types/lodash": "4.14.178",
     "@types/react": "^17.0.2",
     "@types/react-dom": "^17.0.2",
     "commitizen": "4.2.4",
@@ -40,13 +42,14 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "standard-version": "9.3.2",
-    "typescript": "^4.0.2"
+    "typescript": "4.5.4"
   },
   "files": [
     "/lib"
   ],
   "dependencies": {
     "@usedapp/core": "0.9.0",
+    "axios": "0.24.0",
     "dayjs": "1.10.7",
     "immer": "9.0.12",
     "p-memoize": "4.0.3",

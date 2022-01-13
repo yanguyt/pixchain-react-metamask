@@ -29,6 +29,7 @@ export const useWallet = () => {
   };
 };
 
+// eslint-disable-next-line sonarjs/cognitive-complexity
 export const useSigning = (props: { pendingTransactionsEndpoint: string; auto?: boolean }) => {
   const store = useMemo(() => new StateStorage(), []);
   const isBrowser = !!(process as any).browser;

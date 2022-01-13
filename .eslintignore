@@ -3,3 +3,9 @@
 *.test.js
 *.test.ts
 dist
+node_modules
+.vscode
+*.js
+tmp
+.next
+.husky
