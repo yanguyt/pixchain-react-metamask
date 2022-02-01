@@ -4,7 +4,12 @@
     "dictionaryDefinitions": [],
     "dictionaries": [],
     "words": [
-        "dayjs"
+        "addscope",
+        "dayjs",
+        "packagejson",
+        "pixchain",
+        "tropixinc",
+        "usedapp"
     ],
     "ignoreWords": [],
     "import": []
