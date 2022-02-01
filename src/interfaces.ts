@@ -38,6 +38,7 @@ export interface ContractTransactionCallable {
   signature: string;
   contractAddress: string;
   type: BlockchainCallableEnum.TRANSACTION;
+  ether?: string;
 }
 export interface ContractDeployCallable {
   methodName: 'deploy';
@@ -93,4 +94,14 @@ export interface Deploy {
   chainId: number;
   from: string;
   argumentValues: unknown[];
+}
+
+export enum EtherUnitsEnum {
+  WEI = 'wei',
+  KWEI = 'kwei',
+  MWEI = 'mwei',
+  GWEI = 'gwei',
+  SZABO = 'szabo',
+  FINNEY = 'finney',
+  ETHER = 'ether',
 }
