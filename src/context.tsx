@@ -27,12 +27,3 @@ export const Provider: React.FC<{ dappConfig?: Config }> = ({ children, dappConf
     </>
   );
 };
-
-export const SayHello = ({ name }: { name: string }): JSX.Element => {
-  const [g] = useState('Maldito beta-16');
-  return (
-    <div>
-      Hey {name}, go hello to TypeScript {g}.
-    </div>
-  );
-};
