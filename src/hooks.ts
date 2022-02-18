@@ -171,5 +171,6 @@ export const useSigning = (props: Props) => {
     requestPendingSignature,
     setTransactions,
     transactions,
+    addTransaction,
   };
 };
