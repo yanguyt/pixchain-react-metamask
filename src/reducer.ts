@@ -5,18 +5,20 @@ import { State, Transaction } from './interfaces';
 
 export type ReducerActions =
   | { type: 'REQUEST_SIGNING'; payload: Pick<Transaction, 'id'> }
-  | { type: 'ABORT_SIGNING'; payload: { id: string } }
+  | { type: 'ABORT_SIGNING'; payload: Pick<Transaction, 'id'> }
   | { type: 'ADD_TRANSACTION'; payload: Transaction }
+  | { type: 'REMOVE_TRANSACTION'; payload: Pick<Transaction, 'id'> }
   | { type: 'TRANSACTION_SENT'; payload: { id: string; txHash: string } }
-  | { type: 'TRANSACTION_NOTIFIED'; payload: { id: string } }
+  | { type: 'TRANSACTION_NOTIFIED'; payload: Pick<Transaction, 'id'> }
   | { type: 'UPDATE_STATE'; payload: State };
 
+// eslint-disable-next-line sonarjs/cognitive-complexity
 export function reducer(state: State, action: ReducerActions) {
   switch (action.type) {
     case 'REQUEST_SIGNING': {
       const id = action.payload.id;
 
-      if (state.sent[id]) {
+      if (state.current || state.sent[id]) {
         return state;
       }
 
@@ -34,6 +36,17 @@ export function reducer(state: State, action: ReducerActions) {
         const id = action.payload.id;
         if (!draft.sent[id] && !draft.pending[id]) {
           draft.pending[id] = action.payload;
+        }
+      });
+    }
+    case 'REMOVE_TRANSACTION': {
+      return produce(state, (draft) => {
+        const id = action.payload.id;
+        if (draft.pending[id]) {
+          delete draft.pending[id];
+        }
+        if (draft.current?.id === id) {
+          draft.current = null;
         }
       });
     }

@@ -19,7 +19,7 @@ export const useWallet = () => {
   const { account: address, chainId, library, active, activate, activateBrowserWallet, deactivate } = useEthers();
 
   return {
-    address,
+    address: address?.toLowerCase(),
     chainId,
     library,
     active,
@@ -36,18 +36,8 @@ export const useSigning = (props: Props) => {
   const { address, chainId, library, active } = useWallet();
   const [autoSign, setAutoSign] = useState(!!props.auto);
   const { state, dispatch } = useContext(Context);
-  const [transactions, setTransactions] = useState<Transaction[]>([]);
 
   const hasPending = Object?.keys(state.pending).length > 0;
-
-  useEffect(() => {
-    props.persist && isBrowser && store.save(state);
-  }, [isBrowser, props.persist, state, store]);
-
-  useEffect(() => {
-    props.autoload && isBrowser && dispatch({ type: 'UPDATE_STATE', payload: store.get() });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   // Send transaction acknowledgement to the backend.
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -70,7 +60,7 @@ export const useSigning = (props: Props) => {
         const response = await sendTransaction(transaction.data as ContractTransactionCallable, library?.getSigner());
 
         const txHash = response.hash;
-        dispatch({ type: 'TRANSACTION_SENT', payload: { id: transaction.id, txHash: txHash } });
+        dispatch({ type: 'TRANSACTION_SENT', payload: { id: transaction.id, txHash } });
       } catch (error) {
         dispatch({ type: 'ABORT_SIGNING', payload: { id: transaction.id } });
         console.error(error);
@@ -94,13 +84,20 @@ export const useSigning = (props: Props) => {
     [dispatch, library],
   );
 
+  const rejectTransaction = useCallback(
+    (id: Transaction['id']) => {
+      dispatch({ type: 'ABORT_SIGNING', payload: { id } });
+    },
+    [dispatch],
+  );
+
   const requestPendingSignature = useCallback(() => {
     const [transaction] = Object.values(state.pending);
 
-    if (active && transaction) {
+    if (transaction && !state.current) {
       dispatch({ type: 'REQUEST_SIGNING', payload: transaction });
     }
-  }, [active, dispatch, state.pending]);
+  }, [dispatch, state.pending, state.current]);
 
   const addTransaction = useCallback(
     (transaction: Transaction) => {
@@ -120,8 +117,13 @@ export const useSigning = (props: Props) => {
   );
 
   useEffect(() => {
-    transactions.forEach((transaction) => addTransaction(transaction));
-  }, [addTransaction, transactions]);
+    props.persist && isBrowser && store.save(state);
+  }, [isBrowser, props.persist, state, store]);
+
+  useEffect(() => {
+    props.autoload && isBrowser && dispatch({ type: 'UPDATE_STATE', payload: store.get() });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // If auto mode is enabled, request signing of the current transaction.
   useEffect(() => {
@@ -132,7 +134,7 @@ export const useSigning = (props: Props) => {
 
   // Request Metamask signing for current transaction.
   useEffect(() => {
-    if (hasPending && state.current) {
+    if (hasPending && state.current && active) {
       // Handle transaction or deploy
       if (state.current.data.type === BlockchainCallableEnum.TRANSACTION) {
         sendSignedRequest(state.current);
@@ -169,8 +171,7 @@ export const useSigning = (props: Props) => {
     toggleAutoSign: () => setAutoSign((prevState) => !prevState),
     autoSign,
     requestPendingSignature,
-    setTransactions,
-    transactions,
+    rejectTransaction,
     addTransaction,
   };
 };
