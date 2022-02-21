@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.5.0](https://github.com/TropixInc/pixchain-react-metamask/compare/v2.4.0...v2.5.0) (2022-02-21)
+
+
+### Features
+
+* add processing flag ([f5cd088](https://github.com/TropixInc/pixchain-react-metamask/commit/f5cd088622c2b6a884473866ecedfe252335a64a))
+
+
+### Bug Fixes
+
+* merge issue ([078fce1](https://github.com/TropixInc/pixchain-react-metamask/commit/078fce1ac3da5119a64190f0666d02a00c0f6c69))
+
 ## [2.4.0](https://github.com/TropixInc/pixchain-react-metamask/compare/v2.3.0...v2.4.0) (2022-02-21)
 
 

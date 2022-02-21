@@ -36,6 +36,7 @@ export const useSigning = (props: Props) => {
   const { address, chainId, library, active } = useWallet();
   const [autoSign, setAutoSign] = useState(!!props.auto);
   const { state, dispatch } = useContext(Context);
+  const [processing, setProcessing] = useState(false);
 
   const hasPending = Object?.keys(state.pending).length > 0;
 
@@ -137,12 +138,19 @@ export const useSigning = (props: Props) => {
 
   // Request Metamask signing for current transaction.
   useEffect(() => {
-    if (hasPending && state.current && active) {
-      // Handle transaction or deploy
-      if (state.current.data.type === BlockchainCallableEnum.TRANSACTION) {
-        sendSignedRequest(state.current);
-      } else {
-        sendSignedDeployRequest(state.current);
+    if (hasPending && state.current && active && !processing) {
+      try {
+        setProcessing(true);
+        // Handle transaction or deploy
+        if (state.current.data.type === BlockchainCallableEnum.TRANSACTION) {
+          sendSignedRequest(state.current);
+        } else {
+          sendSignedDeployRequest(state.current);
+        }
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setProcessing(false);
       }
     }
   }, [hasPending, sendSignedDeployRequest, sendSignedRequest, state]);
@@ -176,5 +184,6 @@ export const useSigning = (props: Props) => {
     requestPendingSignature,
     rejectTransaction,
     addTransaction,
+    processing,
   };
 };
