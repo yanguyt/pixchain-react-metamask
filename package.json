@@ -1,6 +1,10 @@
 {
   "name": "@tropixinc/pixchain-react-metamask",
+<<<<<<< HEAD
   "version": "2.4.0",
+=======
+  "version": "2.3.0",
+>>>>>>> 5d9868ebf7b2b15464fad67c9beefcf9b7a25d25
   "description": "Blockchain signing library",
   "main": "./lib/cjs/index.js",
   "module": "./lib/esm/index.js",
