@@ -12,7 +12,7 @@ export interface Props {
   persist?: boolean;
   autoload?: boolean;
   handleNotify?: (id: Transaction['id'], txHash: string) => Promise<unknown>;
-  debug?: boolean;
+  onRejectTransaction?: (transaction: Transaction) => Promise<unknown>;
 }
 
 export const useWallet = () => {
@@ -63,10 +63,13 @@ export const useSigning = (props: Props) => {
         dispatch({ type: 'TRANSACTION_SENT', payload: { id: transaction.id, txHash } });
       } catch (error) {
         dispatch({ type: 'ABORT_SIGNING', payload: { id: transaction.id } });
-        console.error(error);
+        if (props.onRejectTransaction) {
+          await props.onRejectTransaction(transaction);
+        }
+        throw error;
       }
     },
-    [dispatch, library],
+    [dispatch, library, props.onRejectTransaction],
   );
 
   // Use Metamask to sign and send the deploy contract.
