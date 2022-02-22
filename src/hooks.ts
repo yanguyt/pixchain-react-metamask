@@ -152,7 +152,7 @@ export const useSigning = (props: Props) => {
         setProcessing(false);
       }
     }, 200),
-    [],
+    [sendSignedDeployRequest, sendSignedRequest],
   );
 
   // Request Metamask signing for current transaction.
