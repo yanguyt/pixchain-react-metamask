@@ -5,7 +5,7 @@ import { Context } from '.';
 import { BlockchainCallableEnum, ContractDeployCallable, ContractTransactionCallable, Transaction } from './interfaces';
 import { StateStorage } from './util';
 import { deployContract, sendTransaction } from './util/blockchain';
-import pDebounce from 'p-debounce';
+import { pDebounce } from './util/promise';
 
 export interface Props {
   auto?: boolean;
