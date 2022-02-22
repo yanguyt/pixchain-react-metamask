@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.6.0](https://github.com/TropixInc/pixchain-react-metamask/compare/v2.5.0...v2.6.0) (2022-02-22)
+
+
+### Features
+
+* add debounce to metamask signature request ([c458c87](https://github.com/TropixInc/pixchain-react-metamask/commit/c458c87f53ff0ffa4f3e8335fbb4026871ee9963))
+
 ## [2.5.0](https://github.com/TropixInc/pixchain-react-metamask/compare/v2.4.0...v2.5.0) (2022-02-21)
 
 
