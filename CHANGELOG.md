@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.6.1](https://github.com/TropixInc/pixchain-react-metamask/compare/v2.6.0...v2.6.1) (2022-02-22)
+
+
+### Bug Fixes
+
+* copy debounce code instead of install package ([cfe74f5](https://github.com/TropixInc/pixchain-react-metamask/commit/cfe74f58c543a39e57c1f320f52fc5798132af29))
+
 ## [2.6.0](https://github.com/TropixInc/pixchain-react-metamask/compare/v2.5.0...v2.6.0) (2022-02-22)
 
 
