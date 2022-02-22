@@ -5,6 +5,7 @@ import { Context } from '.';
 import { BlockchainCallableEnum, ContractDeployCallable, ContractTransactionCallable, Transaction } from './interfaces';
 import { StateStorage } from './util';
 import { deployContract, sendTransaction } from './util/blockchain';
+import pDebounce from 'p-debounce';
 
 export interface Props {
   auto?: boolean;
@@ -44,13 +45,7 @@ export const useSigning = (props: Props) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const notify = useCallback(
     // Use p-memoize to memoize the function.
-    pMemoize(
-      props.handleNotify ||
-        (async () => {
-          return null;
-        }),
-      { cachePromiseRejection: false },
-    ),
+    pMemoize(props.handleNotify || (async () => null), { cachePromiseRejection: false }),
     [props.handleNotify],
   );
 
@@ -121,37 +116,49 @@ export const useSigning = (props: Props) => {
   );
 
   useEffect(() => {
+    /* This is saving the state to the local storage. */
     props.persist && isBrowser && store.save(state);
   }, [isBrowser, props.persist, state, store]);
 
   useEffect(() => {
+    // Load the state from the store.
     props.autoload && isBrowser && dispatch({ type: 'UPDATE_STATE', payload: store.get() });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // If auto mode is enabled, request signing of the current transaction.
   useEffect(() => {
+    // If auto mode is enabled, request signing of the current transaction.
     if (autoSign && hasPending && !state.current) {
       requestPendingSignature();
     }
   }, [autoSign, hasPending, requestPendingSignature, state]);
 
-  // Request Metamask signing for current transaction.
-  useEffect(() => {
-    if (hasPending && state.current && active && !processing) {
+  const sendSignRequest = useCallback(
+    pDebounce(async (transaction: Transaction) => {
+      if (!transaction) {
+        return;
+      }
       try {
         setProcessing(true);
         // Handle transaction or deploy
-        if (state.current.data.type === BlockchainCallableEnum.TRANSACTION) {
-          sendSignedRequest(state.current);
+        if (transaction.data.type === BlockchainCallableEnum.TRANSACTION) {
+          await sendSignedRequest(transaction);
         } else {
-          sendSignedDeployRequest(state.current);
+          await sendSignedDeployRequest(transaction);
         }
       } catch (error) {
         console.error(error);
       } finally {
         setProcessing(false);
       }
+    }, 200),
+    [],
+  );
+
+  // Request Metamask signing for current transaction.
+  useEffect(() => {
+    if (hasPending && state.current && active && !processing) {
+      sendSignRequest(state.current);
     }
   }, [hasPending, sendSignedDeployRequest, sendSignedRequest, state]);
 
