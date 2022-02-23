@@ -17,7 +17,16 @@ export interface Props {
 }
 
 export const useWallet = () => {
-  const { account: address, chainId, library, active, activate, activateBrowserWallet, deactivate } = useEthers();
+  const {
+    account: address,
+    chainId,
+    library,
+    active,
+    activate,
+    activateBrowserWallet,
+    deactivate,
+    connector,
+  } = useEthers();
 
   return {
     address: address?.toLowerCase(),
@@ -27,6 +36,7 @@ export const useWallet = () => {
     activate,
     activateBrowserWallet,
     deactivate,
+    connector,
   };
 };
 
@@ -34,7 +44,8 @@ export const useWallet = () => {
 export const useSigning = (props: Props) => {
   const store = useMemo(() => new StateStorage(), []);
   const isBrowser = !!(process as any).browser;
-  const { address, chainId, library, active } = useWallet();
+  const wallet = useWallet();
+  const { address, chainId, library, active } = wallet;
   const [autoSign, setAutoSign] = useState(!!props.auto);
   const { state, dispatch } = useContext(Context);
   const [processing, setProcessing] = useState(false);
@@ -192,5 +203,6 @@ export const useSigning = (props: Props) => {
     rejectTransaction,
     addTransaction,
     processing,
+    wallet,
   };
 };
