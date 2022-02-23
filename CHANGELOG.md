@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.7.0](https://github.com/TropixInc/pixchain-react-metamask/compare/v1.2.0...v2.7.0) (2022-02-23)
+
+
+### Features
+
+* export wallet connect/disconnect function ([d16667e](https://github.com/TropixInc/pixchain-react-metamask/commit/d16667ebea8dabfe9f5e85c40559054f3ea02f91))
+* suport different hooks on signing ([6e65e1e](https://github.com/TropixInc/pixchain-react-metamask/commit/6e65e1e9b4bec8b3343142b782e5112bd9c2c36b))
+
+## [1.1.0](https://github.com/TropixInc/pixchain-react-metamask/compare/v1.0.3...v1.1.0) (2022-01-27)
+
 ### [2.6.2](https://github.com/TropixInc/pixchain-react-metamask/compare/v2.6.1...v2.6.2) (2022-02-22)
 
 
