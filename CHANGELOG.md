@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.2.0](https://github.com/TropixInc/pixchain-react-metamask/compare/v1.2.0...v2.2.0) (2022-09-06)
+
+
+### Features
+
+* **npm:** publish npm ([afc0e9a](https://github.com/TropixInc/pixchain-react-metamask/commit/afc0e9a26350e36218f35028c5ad35a4529789fd))
+* suport different hooks on signing ([6e65e1e](https://github.com/TropixInc/pixchain-react-metamask/commit/6e65e1e9b4bec8b3343142b782e5112bd9c2c36b))
+
+## [1.1.0](https://github.com/TropixInc/pixchain-react-metamask/compare/v1.0.3...v1.1.0) (2022-01-27)
+
 ## [2.1.0](https://github.com/TropixInc/pixchain-react-metamask/compare/v1.2.0...v2.1.0) (2022-02-18)
 
 
