@@ -1,5 +1,5 @@
 {
-  "name": "@tropixinc/pixchain-react-metamask",
+  "name": "@w3block/pixchain-react-metamask",
   "version": "2.1.0",
   "description": "Blockchain signing library",
   "main": "./lib/cjs/index.js",
@@ -15,7 +15,7 @@
     "build:cjs": "tsc --module commonjs --outDir lib/cjs",
     "prepublishOnly": "npm run build",
     "package": "npm run build && npm pack",
-    "addscope": "node tools/packagejson name @tropixinc/pixchain-react-metamask",
+    "addscope": "node tools/packagejson name @w3block/pixchain-react-metamask",
     "clean": "node tools/cleanup",
     "release": "standard-version",
     "git:add": "git add --all",
@@ -61,7 +61,7 @@
     "swr": "1.1.2"
   },
   "license": "MIT",
-  "author": "Mario Costa <mario@tropix.io>",
+  "author": "Mario Costa <mario@w3block.io>",
   "repository": {
     "url": "https://github.com/TropixInc/pixchain-react-metamask"
   },
