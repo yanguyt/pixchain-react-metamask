@@ -1,6 +1,6 @@
 {
-  "name": "@w3block/pixchain-react-metamask",
-  "version": "2.3.0",
+  "name": "@tropixinc/pixchain-react-metamask",
+  "version": "2.7.0",
   "description": "Blockchain signing library",
   "main": "./lib/cjs/index.js",
   "module": "./lib/esm/index.js",
@@ -57,6 +57,7 @@
     "axios": "0.24.0",
     "dayjs": "1.10.7",
     "immer": "9.0.12",
+    "p-debounce": "4.0.0",
     "p-memoize": "4.0.3",
     "swr": "1.1.2"
   },
