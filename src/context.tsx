@@ -12,7 +12,7 @@ export interface ContextValue {
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 export const Context = createContext<ContextValue>(null!);
 
-export const Provider: React.FC<{ dappConfig?: Config }> = ({ children, dappConfig }): JSX.Element => {
+export const Provider: React.FC<{ children?: ReactNode, dappConfig?: Config }> = ({ children, dappConfig }): JSX.Element => {
   const [config] = useState<Config>({
     autoConnect: true,
     ...(dappConfig ?? {}),
