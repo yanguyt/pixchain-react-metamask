@@ -1,6 +1,6 @@
 {
   "name": "@w3block/pixchain-react-metamask",
-  "version": "2.8.1",
+  "version": "2.8.2",
   "description": "Blockchain signing library",
   "main": "./lib/cjs/index.js",
   "module": "./lib/esm/index.js",
